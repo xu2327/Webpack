@@ -1,19 +1,30 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-source-map',
   entry: {
     main: './src/index.js',
   },
   devServer: {
-    contentBase: './dist',
-    open: true
+    // 指定端口
+    port: 8000,
+    // 指定路径
+    static: path.join(__dirname, './dist'),
+    open: true,
+    hot: true,
+    // hotOnly: true // webpack 5 好像不支持
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
       {
         test: /\.(jpg|png|gif)$/,
         use: {
@@ -32,7 +43,7 @@ module.exports = {
         loader: 'file-loader',
       },
       {
-        test: /\.(css|scss)$/,
+        test: /\.scss$/,
         use: [
           'style-loader',
           {
@@ -45,15 +56,25 @@ module.exports = {
           'postcss-loader'
         ],
       },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader'
+        ],
+      },
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ],
   output: {
+    publicPath: '/',
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   }

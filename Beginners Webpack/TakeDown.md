@@ -189,4 +189,170 @@ production 环境下 `cheap-module-source-map` 最快
 
 # WebpackDevServer
 
+WebpackDevServer 打包的文件不会生成 dist 目录，它会放到你的电脑内存里面，可以提升开发效率，这是 WebpackDebServer 的隐藏特性
+
+可以帮你提升开发效率，就不用每次都去手动打包一下了
 `npm i webpack-dev-server`
+
+```js
+  devServer: {
+    // 指定端口
+    port: 8000,
+    // 指定路径
+    static: path.join(__dirname, './dist'),
+    open: true
+  },
+```
+
+open 运行后自动帮你把网页打开
+可以自动帮你刷新服务器
+
+也可以写一个 express 服务器，然后帮你监听 webpack，如果发生改变，也会自动帮你打包，但是你得手动的去刷新
+
+```js
+const express = require('express');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const config = require('./webpack.config.js');
+// 在node中直接使用webpack
+const complier = webpack(config);
+
+const app = express();
+app.use(
+  webpackDevMiddleware(complier, {
+    publicPath: config.output.publicPath, // 这一行不写也可以
+  })
+);
+
+app.listen(3000, () => {
+  console.log('listening on port 3000');
+});
+```
+
+# Hot Module Replacement 热模块更新
+
+配置一下 hot 跟 hotOnly
+hot: 开启 Hot Module Replacement 功能
+
+`const webpack = require('webpack')`
+
+```js
+  devServer: {
+    // 指定端口
+    port: 8000,
+    // 指定路径
+    static: path.join(__dirname, './dist'),
+    open: true,
+    hot: true
+    // hotOnly: true // webpack 5 好像不支持
+  },
+    plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+    }),
+    new CleanWebpackPlugin(),
+    new webpack.NameModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
+```
+
+这样 html 的功能就开启了
+
+```js
+if (module.hot) {
+  module.hot.accept('./number', () => {
+    document.body.removeChild(document.getElementById('number'));
+    number();
+  });
+}
+```
+
+当那个文件发生变化的时候，执行回调里面的内容 可以实现热模块
+
+# Babel 处理 ES6
+
+把 ES6 代码转换成 ES5 代码
+
+`npm i --save-dev babel-loader @babel/core`这个只是一个连接 js 的桥梁
+
+`npm i @babel/preset-env --save-dev` 这个才可以帮助你转换
+
+但这样只转换了一部分
+
+`npm i --save @babel/polyfill`
+`import "@babel/polyfill"` 引入，补全一下就可以了
+
+```js
+{
+  test: /\.js$/,
+  exclude: /node_modules/,
+  loader: 'babel-loader',
+  options: {
+  presets: [['@babel/preset-env',{
+    targets: {
+      edge: '17',
+      firefox: '60',
+      chrome: '67',
+      safari: '11.1'
+    },
+    useBuiltIns: 'usage'
+  }]]
+}
+},
+```
+
+exclude 排除
+targets 运行在至少是那些浏览器的版本上
+useBuiltIns 根据你的使用长期，补齐 ES6 语法包，减少包大小
+
+如果浏览器以及支持 ES6 了，那就不会转换了
+
+用这个方式不会污染全局环境，会以闭包的形式去注入
+`npm i --save-dev @babel/plugin-transform-runtime`
+`npm i --save @babel/runtime`
+
+```js
+options: {
+  'plugins': [['@babel/plugin-transform-runtime', {
+    "corejs": 2,
+    "helpers": false,
+    "regenerator": true,
+    "useESModules": false
+  }
+  ]]
+}
+```
+
+corejs 改成 2 之后 要额外安装一个包
+`npm i --save @babel/runtime-corejs2`
+当我们的页面存在一些 map Promise 方法的时候，就可以帮你打包到 main.js 里面，不然不会帮你打包进来
+
+可以创建一个 .babelrc 文件
+把配置代码放进去，就可以 不再 webpack.config.js 里不写那些配置了
+
+# 打包 React 框架代码
+
+`npm i react react-dom --save` 安装 react 框架
+`npm i --save-dev @babel/preset-react` 安装 react 对应的解析包
+
+```js
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "edge": "17",
+                    "firefox": "60",
+                    "chrome": "67",
+                    "safari": "11.1"
+                },
+                "useBuiltIns": "usage"
+            }
+        ],
+        "@babel/preset-react"
+    ]
+}
+```
+
+从下往上 从右往左执行 先转换 react 代码，再把 ES6 转换成 ES5

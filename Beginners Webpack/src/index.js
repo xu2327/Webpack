@@ -21,6 +21,63 @@
 // var root = document.getElementById('root')
 // root.innerHTML = '<div class="iconfont icon-shouji"></div>'
 
-consle.log('hello world')
 
+/**
+ * todo 测试 Hot Module Replacement
+ */
+// import './style.css'
+// var btn = document.createElement('button')
+// btn.innerHTML = '新增'
+// document.body.appendChild(btn)
+
+// btn.onclick = function () {
+//     var div = document.createElement('div')
+//     div.innerHTML = 'item'
+//     document.body.appendChild(div)
+// }
+
+// import counter from './counter'
+// import number from './number'
+
+// counter()
+// number()
+
+// if (module.hot) {
+//     module.hot.accept('./number', () => {
+//         document.body.removeChild(document.getElementById('number'))
+//         number()
+//     })
+// }
+
+/**
+ * todo Babel 处理 ES6
+ */
+
+
+// 使用 @babel/plugin-transform-runtime 之后就不引用下面的东西了
+// import "@babel/polyfill"
+
+// const arr = [
+//     new Promise(() => { }),
+//     new Promise(() => { }),
+// ]
+
+// arr.map(item => console.log(item))
+
+/**
+ * todo 打包 React 代码
+ */
+
+import "@babel/polyfill"
+
+import React, { Component } from 'react'
+import ReactDom from 'react-dom'
+
+class App extends Component {
+    render() {
+        return <div>hello world</div>
+    }
+}
+
+ReactDom.render(<App />, document.getElementById('root'))
 
