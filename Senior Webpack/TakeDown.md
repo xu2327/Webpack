@@ -22,3 +22,13 @@ optimization: {
   usedExports: true
 },
 ```
+
+# Develoment 和 Production 模式的区分打包
+
+`npm i webpack-merge -D`
+
+开发环境 使用 `webpack-dev-server` 方便我们开发
+线上环境 需要我们对代码进行压缩 所以使用 webpack 打包出文件
+然后可以写一个开发环境的配置和一个线上环境的配置，吧一些公用的配置提取出来，通过 webpack-merge 生成当前环境下要使用的 config 内容
+
+# webpack 和 Code Splitting 代码分割
