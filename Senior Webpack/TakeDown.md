@@ -117,3 +117,13 @@ document.addEventListener('click', () => {
 ```
 
 chunk 是你页面引入一个包，那就算一个 chunk
+
+# Preloading Prefetching
+
+配置 --profile --json > stats.json 意思是 再打包过程中，把一些打包描述放到 stats.json 文件里面 文件的格式是 json 格式
+
+然后就会生成 stats.json 的静态文件 然后去访问 http://webpack.github.io/analyse/ 把这个文件放上去，就可以帮你分析了
+
+webpackPreloading: true 是跟你的主模块一块加载
+
+webpackPrefetch: true 就是等你游览器有空余的时间的时候，就会偷偷的去帮你加载一下，就不用等到你去点击的时候再加载了，当你再点击的时候，就是直接拿缓存了

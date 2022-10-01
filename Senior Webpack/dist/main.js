@@ -15,7 +15,7 @@
   \**********************/
 /***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
-eval("/**\r\n * todo: Trre Shaking 只支持 ES Module\r\n */\n\n/*\r\nimport { add } from './math'\r\n\r\nadd(1, 1)\r\n*/\n\n/**\r\n * todo: Code Splitting\r\n */\n\n/* import _ from 'lodash' */\n// 第一种方式\n// 首次访问页面时，加载 main.js (2mb)\n// 打包文件会很大，加载时间会长\n// 重新访问我们的页面，又要加载2mb的内容\n// 业务逻辑 1mb\n// console.log(_.join(['a', 'b', 'c'], '***'))\n// 此处省略10万行业务逻辑\n// console.log(_.join(['a', 'b', 'c'], '***'))\n// 第二种方式\n// main.js被拆成 lodash.js(1mb),main.js(1mb)\n// 当页面逻辑发生变化是，只要加载main.js 即可(1mb)\n// Code Splitting\n// import _ from 'lodash'\n// console.log(_.join(['a', 'b', 'c'], '***'))\n// console.log(_.join(['a', 'b', 'c'], '***'))\n// function getComponent() {\n//     return import(/*webpackChunkName:\"lodash\"*/'lodash').then(({ default: _ }) => {\n//         const element = document.createElement('div');\n//         element.innerHTML = _.join(['xuwei', 'www'], '-');\n//         return element;\n//     })\n// }\n// getComponent().then((element) => {\n//     document.body.appendChild(element);\n// });\n// import _ from 'lodash'\n// const element = document.createElement('div');\n// element.innerHTML = _.join(['xuwei', 'www'], '-');\n// document.body.appendChild(element);\n// import { add } from './math.js'\n// add(1, 2)\n\n/**\r\n * todo Lazy Loading 懒加载, Chunk\r\n */\n// function getComponent() {\n//     return import(/*webpackChunkName:\"lodash\"*/'lodash').then(({ default: _ }) => {\n//         const element = document.createElement('div');\n//         element.innerHTML = _.join(['xuwei', 'www'], '-');\n//         return element;\n//     })\n// }\nasync function getComponent() {\n  const {\n    default: _\n  } = await __webpack_require__.e(/*! import() | lodash */ \"lodash\").then(__webpack_require__.t.bind(__webpack_require__, /*! lodash */ \"./node_modules/lodash/lodash.js\", 23));\n  const element = document.createElement('div');\n  element.innerHTML = _.join(['xuwei', 'www'], '-');\n  return element;\n}\n\ndocument.addEventListener('click', () => {\n  getComponent().then(element => {\n    document.body.appendChild(element);\n  });\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvaW5kZXguanMuanMiLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBOztBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFFQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFFQTtBQUVBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7O0FBR0E7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUdBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9iZWdpbm5lcnMtd2VicGFjay8uL3NyYy9pbmRleC5qcz9iNjM1Il0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiB0b2RvOiBUcnJlIFNoYWtpbmcg5Y+q5pSv5oyBIEVTIE1vZHVsZVxyXG4gKi9cclxuLypcclxuaW1wb3J0IHsgYWRkIH0gZnJvbSAnLi9tYXRoJ1xyXG5cclxuYWRkKDEsIDEpXHJcbiovXHJcblxyXG4vKipcclxuICogdG9kbzogQ29kZSBTcGxpdHRpbmdcclxuICovXHJcblxyXG4vKiBpbXBvcnQgXyBmcm9tICdsb2Rhc2gnICovXHJcblxyXG4vLyDnrKzkuIDnp43mlrnlvI9cclxuLy8g6aaW5qyh6K6/6Zeu6aG16Z2i5pe277yM5Yqg6L29IG1haW4uanMgKDJtYilcclxuLy8g5omT5YyF5paH5Lu25Lya5b6I5aSn77yM5Yqg6L295pe26Ze05Lya6ZW/XHJcbi8vIOmHjeaWsOiuv+mXruaIkeS7rOeahOmhtemdou+8jOWPiOimgeWKoOi9vTJtYueahOWGheWuuVxyXG5cclxuLy8g5Lia5Yqh6YC76L6RIDFtYlxyXG4vLyBjb25zb2xlLmxvZyhfLmpvaW4oWydhJywgJ2InLCAnYyddLCAnKioqJykpXHJcbi8vIOatpOWkhOecgeeVpTEw5LiH6KGM5Lia5Yqh6YC76L6RXHJcbi8vIGNvbnNvbGUubG9nKF8uam9pbihbJ2EnLCAnYicsICdjJ10sICcqKionKSlcclxuXHJcbi8vIOesrOS6jOenjeaWueW8j1xyXG4vLyBtYWluLmpz6KKr5ouG5oiQIGxvZGFzaC5qcygxbWIpLG1haW4uanMoMW1iKVxyXG4vLyDlvZPpobXpnaLpgLvovpHlj5HnlJ/lj5jljJbmmK/vvIzlj6ropoHliqDovb1tYWluLmpzIOWNs+WPrygxbWIpXHJcblxyXG4vLyBDb2RlIFNwbGl0dGluZ1xyXG4vLyBpbXBvcnQgXyBmcm9tICdsb2Rhc2gnXHJcblxyXG4vLyBjb25zb2xlLmxvZyhfLmpvaW4oWydhJywgJ2InLCAnYyddLCAnKioqJykpXHJcbi8vIGNvbnNvbGUubG9nKF8uam9pbihbJ2EnLCAnYicsICdjJ10sICcqKionKSlcclxuXHJcbi8vIGZ1bmN0aW9uIGdldENvbXBvbmVudCgpIHtcclxuLy8gICAgIHJldHVybiBpbXBvcnQoLyp3ZWJwYWNrQ2h1bmtOYW1lOlwibG9kYXNoXCIqLydsb2Rhc2gnKS50aGVuKCh7IGRlZmF1bHQ6IF8gfSkgPT4ge1xyXG4vLyAgICAgICAgIGNvbnN0IGVsZW1lbnQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcclxuLy8gICAgICAgICBlbGVtZW50LmlubmVySFRNTCA9IF8uam9pbihbJ3h1d2VpJywgJ3d3dyddLCAnLScpO1xyXG4vLyAgICAgICAgIHJldHVybiBlbGVtZW50O1xyXG4vLyAgICAgfSlcclxuLy8gfVxyXG5cclxuLy8gZ2V0Q29tcG9uZW50KCkudGhlbigoZWxlbWVudCkgPT4ge1xyXG4vLyAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChlbGVtZW50KTtcclxuLy8gfSk7XHJcblxyXG4vLyBpbXBvcnQgXyBmcm9tICdsb2Rhc2gnXHJcblxyXG4vLyBjb25zdCBlbGVtZW50ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XHJcbi8vIGVsZW1lbnQuaW5uZXJIVE1MID0gXy5qb2luKFsneHV3ZWknLCAnd3d3J10sICctJyk7XHJcbi8vIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoZWxlbWVudCk7XHJcblxyXG4vLyBpbXBvcnQgeyBhZGQgfSBmcm9tICcuL21hdGguanMnXHJcbi8vIGFkZCgxLCAyKVxyXG5cclxuXHJcbi8qKlxyXG4gKiB0b2RvIExhenkgTG9hZGluZyDmh5LliqDovb0sIENodW5rXHJcbiAqL1xyXG5cclxuLy8gZnVuY3Rpb24gZ2V0Q29tcG9uZW50KCkge1xyXG4vLyAgICAgcmV0dXJuIGltcG9ydCgvKndlYnBhY2tDaHVua05hbWU6XCJsb2Rhc2hcIiovJ2xvZGFzaCcpLnRoZW4oKHsgZGVmYXVsdDogXyB9KSA9PiB7XHJcbi8vICAgICAgICAgY29uc3QgZWxlbWVudCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xyXG4vLyAgICAgICAgIGVsZW1lbnQuaW5uZXJIVE1MID0gXy5qb2luKFsneHV3ZWknLCAnd3d3J10sICctJyk7XHJcbi8vICAgICAgICAgcmV0dXJuIGVsZW1lbnQ7XHJcbi8vICAgICB9KVxyXG4vLyB9XHJcblxyXG5hc3luYyBmdW5jdGlvbiBnZXRDb21wb25lbnQoKSB7XHJcbiAgICBjb25zdCB7IGRlZmF1bHQ6IF8gfSA9IGF3YWl0IGltcG9ydCgvKndlYnBhY2tDaHVua05hbWU6XCJsb2Rhc2hcIiovJ2xvZGFzaCcpXHJcbiAgICBjb25zdCBlbGVtZW50ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XHJcbiAgICBlbGVtZW50LmlubmVySFRNTCA9IF8uam9pbihbJ3h1d2VpJywgJ3d3dyddLCAnLScpO1xyXG4gICAgcmV0dXJuIGVsZW1lbnQ7XHJcbn1cclxuXHJcblxyXG5kb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsICgpID0+IHtcclxuICAgIGdldENvbXBvbmVudCgpLnRoZW4oKGVsZW1lbnQpID0+IHtcclxuICAgICAgICBkb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKGVsZW1lbnQpO1xyXG4gICAgfSk7XHJcbn0pIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/index.js\n");
+eval("/**\r\n * todo: Trre Shaking 只支持 ES Module\r\n */\n\n/*\r\nimport { add } from './math'\r\n\r\nadd(1, 1)\r\n*/\n\n/**\r\n * todo: Code Splitting\r\n */\n\n/* import _ from 'lodash' */\n// 第一种方式\n// 首次访问页面时，加载 main.js (2mb)\n// 打包文件会很大，加载时间会长\n// 重新访问我们的页面，又要加载2mb的内容\n// 业务逻辑 1mb\n// console.log(_.join(['a', 'b', 'c'], '***'))\n// 此处省略10万行业务逻辑\n// console.log(_.join(['a', 'b', 'c'], '***'))\n// 第二种方式\n// main.js被拆成 lodash.js(1mb),main.js(1mb)\n// 当页面逻辑发生变化是，只要加载main.js 即可(1mb)\n// Code Splitting\n// import _ from 'lodash'\n// console.log(_.join(['a', 'b', 'c'], '***'))\n// console.log(_.join(['a', 'b', 'c'], '***'))\n// function getComponent() {\n//     return import(/*webpackChunkName:\"lodash\"*/'lodash').then(({ default: _ }) => {\n//         const element = document.createElement('div');\n//         element.innerHTML = _.join(['xuwei', 'www'], '-');\n//         return element;\n//     })\n// }\n// getComponent().then((element) => {\n//     document.body.appendChild(element);\n// });\n// import _ from 'lodash'\n// const element = document.createElement('div');\n// element.innerHTML = _.join(['xuwei', 'www'], '-');\n// document.body.appendChild(element);\n// import { add } from './math.js'\n// add(1, 2)\n\n/**\r\n * todo Lazy Loading 懒加载, Chunk\r\n */\n// function getComponent() {\n//     return import(/*webpackChunkName:\"lodash\"*/'lodash').then(({ default: _ }) => {\n//         const element = document.createElement('div');\n//         element.innerHTML = _.join(['xuwei', 'www'], '-');\n//         return element;\n//     })\n// }\n// async function getComponent() {\n//     const { default: _ } = await import(/*webpackChunkName:\"lodash\"*/'lodash')\n//     const element = document.createElement('div');\n//     element.innerHTML = _.join(['xuwei', 'www'], '-');\n//     return element\n// }\n// document.addEventListener('click', () => {\n//     getComponent().then((element) => {\n//         document.body.appendChild(element);\n//     });\n// })\n\n/**\r\n * todo Preloading Prefetching\r\n */\ndocument.addEventListener('click', () => {\n  __webpack_require__.e(/*! import() */ \"src_click_js\").then(__webpack_require__.bind(__webpack_require__, /*! ./click.js */ \"./src/click.js\")).then(_ref => {\n    let {\n      default: func\n    } = _ref;\n    func();\n  });\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvaW5kZXguanMuanMiLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBOztBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBOztBQUVBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFFQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFFQTtBQUVBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7O0FBR0E7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFHQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUlBO0FBQ0E7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9iZWdpbm5lcnMtd2VicGFjay8uL3NyYy9pbmRleC5qcz9iNjM1Il0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiB0b2RvOiBUcnJlIFNoYWtpbmcg5Y+q5pSv5oyBIEVTIE1vZHVsZVxyXG4gKi9cclxuLypcclxuaW1wb3J0IHsgYWRkIH0gZnJvbSAnLi9tYXRoJ1xyXG5cclxuYWRkKDEsIDEpXHJcbiovXHJcblxyXG4vKipcclxuICogdG9kbzogQ29kZSBTcGxpdHRpbmdcclxuICovXHJcblxyXG4vKiBpbXBvcnQgXyBmcm9tICdsb2Rhc2gnICovXHJcblxyXG4vLyDnrKzkuIDnp43mlrnlvI9cclxuLy8g6aaW5qyh6K6/6Zeu6aG16Z2i5pe277yM5Yqg6L29IG1haW4uanMgKDJtYilcclxuLy8g5omT5YyF5paH5Lu25Lya5b6I5aSn77yM5Yqg6L295pe26Ze05Lya6ZW/XHJcbi8vIOmHjeaWsOiuv+mXruaIkeS7rOeahOmhtemdou+8jOWPiOimgeWKoOi9vTJtYueahOWGheWuuVxyXG5cclxuLy8g5Lia5Yqh6YC76L6RIDFtYlxyXG4vLyBjb25zb2xlLmxvZyhfLmpvaW4oWydhJywgJ2InLCAnYyddLCAnKioqJykpXHJcbi8vIOatpOWkhOecgeeVpTEw5LiH6KGM5Lia5Yqh6YC76L6RXHJcbi8vIGNvbnNvbGUubG9nKF8uam9pbihbJ2EnLCAnYicsICdjJ10sICcqKionKSlcclxuXHJcbi8vIOesrOS6jOenjeaWueW8j1xyXG4vLyBtYWluLmpz6KKr5ouG5oiQIGxvZGFzaC5qcygxbWIpLG1haW4uanMoMW1iKVxyXG4vLyDlvZPpobXpnaLpgLvovpHlj5HnlJ/lj5jljJbmmK/vvIzlj6ropoHliqDovb1tYWluLmpzIOWNs+WPrygxbWIpXHJcblxyXG4vLyBDb2RlIFNwbGl0dGluZ1xyXG4vLyBpbXBvcnQgXyBmcm9tICdsb2Rhc2gnXHJcblxyXG4vLyBjb25zb2xlLmxvZyhfLmpvaW4oWydhJywgJ2InLCAnYyddLCAnKioqJykpXHJcbi8vIGNvbnNvbGUubG9nKF8uam9pbihbJ2EnLCAnYicsICdjJ10sICcqKionKSlcclxuXHJcbi8vIGZ1bmN0aW9uIGdldENvbXBvbmVudCgpIHtcclxuLy8gICAgIHJldHVybiBpbXBvcnQoLyp3ZWJwYWNrQ2h1bmtOYW1lOlwibG9kYXNoXCIqLydsb2Rhc2gnKS50aGVuKCh7IGRlZmF1bHQ6IF8gfSkgPT4ge1xyXG4vLyAgICAgICAgIGNvbnN0IGVsZW1lbnQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcclxuLy8gICAgICAgICBlbGVtZW50LmlubmVySFRNTCA9IF8uam9pbihbJ3h1d2VpJywgJ3d3dyddLCAnLScpO1xyXG4vLyAgICAgICAgIHJldHVybiBlbGVtZW50O1xyXG4vLyAgICAgfSlcclxuLy8gfVxyXG5cclxuLy8gZ2V0Q29tcG9uZW50KCkudGhlbigoZWxlbWVudCkgPT4ge1xyXG4vLyAgICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChlbGVtZW50KTtcclxuLy8gfSk7XHJcblxyXG4vLyBpbXBvcnQgXyBmcm9tICdsb2Rhc2gnXHJcblxyXG4vLyBjb25zdCBlbGVtZW50ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XHJcbi8vIGVsZW1lbnQuaW5uZXJIVE1MID0gXy5qb2luKFsneHV3ZWknLCAnd3d3J10sICctJyk7XHJcbi8vIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoZWxlbWVudCk7XHJcblxyXG4vLyBpbXBvcnQgeyBhZGQgfSBmcm9tICcuL21hdGguanMnXHJcbi8vIGFkZCgxLCAyKVxyXG5cclxuXHJcbi8qKlxyXG4gKiB0b2RvIExhenkgTG9hZGluZyDmh5LliqDovb0sIENodW5rXHJcbiAqL1xyXG5cclxuLy8gZnVuY3Rpb24gZ2V0Q29tcG9uZW50KCkge1xyXG4vLyAgICAgcmV0dXJuIGltcG9ydCgvKndlYnBhY2tDaHVua05hbWU6XCJsb2Rhc2hcIiovJ2xvZGFzaCcpLnRoZW4oKHsgZGVmYXVsdDogXyB9KSA9PiB7XHJcbi8vICAgICAgICAgY29uc3QgZWxlbWVudCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xyXG4vLyAgICAgICAgIGVsZW1lbnQuaW5uZXJIVE1MID0gXy5qb2luKFsneHV3ZWknLCAnd3d3J10sICctJyk7XHJcbi8vICAgICAgICAgcmV0dXJuIGVsZW1lbnQ7XHJcbi8vICAgICB9KVxyXG4vLyB9XHJcblxyXG4vLyBhc3luYyBmdW5jdGlvbiBnZXRDb21wb25lbnQoKSB7XHJcbi8vICAgICBjb25zdCB7IGRlZmF1bHQ6IF8gfSA9IGF3YWl0IGltcG9ydCgvKndlYnBhY2tDaHVua05hbWU6XCJsb2Rhc2hcIiovJ2xvZGFzaCcpXHJcbi8vICAgICBjb25zdCBlbGVtZW50ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XHJcbi8vICAgICBlbGVtZW50LmlubmVySFRNTCA9IF8uam9pbihbJ3h1d2VpJywgJ3d3dyddLCAnLScpO1xyXG4vLyAgICAgcmV0dXJuIGVsZW1lbnRcclxuLy8gfVxyXG5cclxuXHJcbi8vIGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgKCkgPT4ge1xyXG4vLyAgICAgZ2V0Q29tcG9uZW50KCkudGhlbigoZWxlbWVudCkgPT4ge1xyXG4vLyAgICAgICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoZWxlbWVudCk7XHJcbi8vICAgICB9KTtcclxuLy8gfSlcclxuXHJcbi8qKlxyXG4gKiB0b2RvIFByZWxvYWRpbmcgUHJlZmV0Y2hpbmdcclxuICovXHJcblxyXG5cclxuXHJcbmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgKCkgPT4ge1xyXG4gICAgaW1wb3J0KC8qIHdlYnBhY2tQcmVmZXRjaDogdHJ1ZSAqLycuL2NsaWNrLmpzJykudGhlbigoeyBkZWZhdWx0OiBmdW5jIH0pID0+IHtcclxuICAgICAgICBmdW5jKCk7XHJcbiAgICB9KVxyXG59KSJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/index.js\n");
 
 /***/ })
 
@@ -34,8 +34,8 @@ eval("/**\r\n * todo: Trre Shaking 只支持 ES Module\r\n */\n\n/*\r\nimport { 
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			id: moduleId,
-/******/ 			loaded: false,
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
@@ -49,9 +49,6 @@ eval("/**\r\n * todo: Trre Shaking 只支持 ES Module\r\n */\n\n/*\r\nimport { 
 /******/ 			module.error = e;
 /******/ 			throw e;
 /******/ 		}
-/******/ 	
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -67,46 +64,48 @@ eval("/**\r\n * todo: Trre Shaking 只支持 ES Module\r\n */\n\n/*\r\nimport { 
 /******/ 	__webpack_require__.i = [];
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/create fake namespace object */
+/******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	!function() {
-/******/ 		var getProto = Object.getPrototypeOf ? function(obj) { return Object.getPrototypeOf(obj); } : function(obj) { return obj.__proto__; };
-/******/ 		var leafPrototypes;
-/******/ 		// create a fake namespace object
-/******/ 		// mode & 1: value is a module id, require it
-/******/ 		// mode & 2: merge all properties of value into the ns
-/******/ 		// mode & 4: return value when already ns object
-/******/ 		// mode & 16: return value when it's Promise-like
-/******/ 		// mode & 8|1: behave like require
-/******/ 		__webpack_require__.t = function(value, mode) {
-/******/ 			if(mode & 1) value = this(value);
-/******/ 			if(mode & 8) return value;
-/******/ 			if(typeof value === 'object' && value) {
-/******/ 				if((mode & 4) && value.__esModule) return value;
-/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = function(result, chunkIds, fn, priority) {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
 /******/ 			}
-/******/ 			var ns = Object.create(null);
-/******/ 			__webpack_require__.r(ns);
-/******/ 			var def = {};
-/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
-/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
-/******/ 				Object.getOwnPropertyNames(current).forEach(function(key) { def[key] = function() { return value[key]; }; });
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var chunkIds = deferred[i][0];
+/******/ 				var fn = deferred[i][1];
+/******/ 				var priority = deferred[i][2];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every(function(key) { return __webpack_require__.O[key](chunkIds[j]); })) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
 /******/ 			}
-/******/ 			def['default'] = function() { return value; };
-/******/ 			__webpack_require__.d(ns, def);
-/******/ 			return ns;
+/******/ 			return result;
 /******/ 		};
 /******/ 	}();
 /******/ 	
-/******/ 	/* webpack/runtime/define property getters */
+/******/ 	/* webpack/runtime/chunk prefetch function */
 /******/ 	!function() {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = function(exports, definition) {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
+/******/ 		__webpack_require__.F = {};
+/******/ 		__webpack_require__.E = function(chunkId) {
+/******/ 			Object.keys(__webpack_require__.F).map(function(key) {
+/******/ 				__webpack_require__.F[key](chunkId);
+/******/ 			});
+/******/ 		}
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/ensure chunk */
@@ -147,7 +146,7 @@ eval("/**\r\n * todo: Trre Shaking 只支持 ES Module\r\n */\n\n/*\r\nimport { 
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
-/******/ 		__webpack_require__.h = function() { return "74dbb5b66df724a30bb7"; }
+/******/ 		__webpack_require__.h = function() { return "d669d1a09955e9437e95"; }
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -221,15 +220,6 @@ eval("/**\r\n * todo: Trre Shaking 只支持 ES Module\r\n */\n\n/*\r\nimport { 
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	}();
-/******/ 	
-/******/ 	/* webpack/runtime/node module decorator */
-/******/ 	!function() {
-/******/ 		__webpack_require__.nmd = function(module) {
-/******/ 			module.paths = [];
-/******/ 			if (!module.children) module.children = [];
-/******/ 			return module;
 /******/ 		};
 /******/ 	}();
 /******/ 	
@@ -697,7 +687,20 @@ eval("/**\r\n * todo: Trre Shaking 只支持 ES Module\r\n */\n\n/*\r\nimport { 
 /******/ 				}
 /******/ 		};
 /******/ 		
-/******/ 		// no prefetching
+/******/ 		__webpack_require__.F.j = function(chunkId) {
+/******/ 			if((!__webpack_require__.o(installedChunks, chunkId) || installedChunks[chunkId] === undefined) && true) {
+/******/ 				installedChunks[chunkId] = null;
+/******/ 				var link = document.createElement('link');
+/******/ 		
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					link.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				link.rel = "prefetch";
+/******/ 				link.as = "script";
+/******/ 				link.href = __webpack_require__.p + __webpack_require__.u(chunkId);
+/******/ 				document.head.appendChild(link);
+/******/ 			}
+/******/ 		};
 /******/ 		
 /******/ 		// no preloaded
 /******/ 		
@@ -1194,7 +1197,7 @@ eval("/**\r\n * todo: Trre Shaking 只支持 ES Module\r\n */\n\n/*\r\nimport { 
 /******/ 			});
 /******/ 		};
 /******/ 		
-/******/ 		// no on chunks loaded
+/******/ 		__webpack_require__.O.j = function(chunkId) { return installedChunks[chunkId] === 0; };
 /******/ 		
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = function(parentChunkLoadingFunction, data) {
@@ -1220,12 +1223,19 @@ eval("/**\r\n * todo: Trre Shaking 只支持 ES Module\r\n */\n\n/*\r\nimport { 
 /******/ 				}
 /******/ 				installedChunks[chunkId] = 0;
 /******/ 			}
-/******/ 		
+/******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
 /******/ 		var chunkLoadingGlobal = self["webpackChunkbeginners_webpack"] = self["webpackChunkbeginners_webpack"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/startup prefetch */
+/******/ 	!function() {
+/******/ 		__webpack_require__.O(0, ["main"], function() {
+/******/ 			__webpack_require__.E("src_click_js");
+/******/ 		}, 5);
 /******/ 	}();
 /******/ 	
 /************************************************************************/
@@ -1234,6 +1244,7 @@ eval("/**\r\n * todo: Trre Shaking 只支持 ES Module\r\n */\n\n/*\r\nimport { 
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;

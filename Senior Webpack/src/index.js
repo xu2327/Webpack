@@ -67,16 +67,28 @@ add(1, 1)
 //     })
 // }
 
-async function getComponent() {
-    const { default: _ } = await import(/*webpackChunkName:"lodash"*/'lodash')
-    const element = document.createElement('div');
-    element.innerHTML = _.join(['xuwei', 'www'], '-');
-    return element;
-}
+// async function getComponent() {
+//     const { default: _ } = await import(/*webpackChunkName:"lodash"*/'lodash')
+//     const element = document.createElement('div');
+//     element.innerHTML = _.join(['xuwei', 'www'], '-');
+//     return element
+// }
+
+
+// document.addEventListener('click', () => {
+//     getComponent().then((element) => {
+//         document.body.appendChild(element);
+//     });
+// })
+
+/**
+ * todo Preloading Prefetching
+ */
+
 
 
 document.addEventListener('click', () => {
-    getComponent().then((element) => {
-        document.body.appendChild(element);
-    });
+    import(/* webpackPrefetch: true */'./click.js').then(({ default: func }) => {
+        func();
+    })
 })
