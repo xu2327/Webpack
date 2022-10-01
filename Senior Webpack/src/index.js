@@ -97,6 +97,18 @@ add(1, 1)
  * todo CSS 文件分割
  */
 
-import './style.css'
-import './style1.css'
-console.log(123)
+// import './style.css'
+// import './style1.css'
+// console.log(123)
+
+
+/**
+ * todo Webpack 与 浏览器缓存(Caching)
+ */
+
+import _ from 'lodash'
+import $ from 'jquery'
+
+const dom = $('<div>')
+dom.html(_.join(['xw123', '456'], '-'))
+$('body').append(dom)
