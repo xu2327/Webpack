@@ -219,3 +219,19 @@ new webpack.ProvidePlugin({
 `npm i imports-loader --save-dev`
 
 webpack5 不支持这个配置了
+
+# 环境变量得使用方法
+
+env production 默认是 true
+
+```js
+module.exports = (env) => {
+  if (env && env.production) {
+    return merge(commonConfig, prodConfig);
+  } else {
+    return merge(commonConfig, devConfig);
+  }
+};
+```
+
+通过这个来判断是哪个环境
