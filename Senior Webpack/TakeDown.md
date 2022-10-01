@@ -32,3 +32,67 @@ optimization: {
 然后可以写一个开发环境的配置和一个线上环境的配置，吧一些公用的配置提取出来，通过 webpack-merge 生成当前环境下要使用的 config 内容
 
 # webpack 和 Code Splitting 代码分割
+
+`npm i lodash --save`
+
+```js
+import _ from 'lodash';
+window._ = _;
+```
+
+对代码进行拆分，可以让我们的代码性能更高一些，用户体验更好一些
+
+```js
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        }
+    },
+```
+
+意思是 我要帮你去做代码分割了
+
+`npm i babel-plugin-dynamic-import-webpack --save-dev` 不支持魔法注释
+
+就可以自动帮你去做分割了 webpack4 的话要去 .babelrc 里配置
+
+```js
+    "plugins": [
+        [
+            "dynamic-import-webpack",
+        ]
+    ]
+```
+
+安装
+`npm i --save-dev @babel/plugin-syntax-dynamic-import` 支持魔法注释
+
+```js
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            minSize: 20000, //大于20kb就不做代码分割
+            minRemainingSize: 0,
+            minChunks: 1, // 最少引入一次 lodash
+            maxAsyncRequests: 30, // 同时加载模块库最多30个
+            maxInitialRequests: 30, // 入口文件加载的时候最多30个
+            enforceSizeThreshold: 50000,
+            cacheGroups: {
+                defaultVendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10, // 优先级
+                    reuseExistingChunk: true, // 如果模块被打包过了，就忽略
+                    filename: 'vendors.js'
+                },
+                default: {
+                    // minChunks: 2,
+                    priority: -20, // 优先级
+                    reuseExistingChunk: true, // 如果模块被打包过了，就忽略
+                    filename: 'common.js'
+                },
+            },
+        }
+    },
+```
+
+# Lazy Loading 懒加载, Chunk

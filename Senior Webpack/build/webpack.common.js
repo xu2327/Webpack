@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
     entry: {
+        // lodash: './src/lodash.js',
         main: './src/index.js',
     },
     module: {
@@ -60,8 +61,33 @@ module.exports = {
         }),
         new CleanWebpackPlugin()
     ],
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            minSize: 20000, //大于20kb就不做代码分割
+            minRemainingSize: 0,
+            minChunks: 1, // 最少引入一次 lodash
+            maxAsyncRequests: 30, // 同时加载模块库最多30个
+            maxInitialRequests: 30, // 入口文件加载的时候最多30个
+            enforceSizeThreshold: 50000,
+            cacheGroups: {
+                defaultVendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10, // 优先级
+                    reuseExistingChunk: true, // 如果模块被打包过了，就忽略
+                    filename: 'vendors.js'
+                },
+                default: {
+                    // minChunks: 2,
+                    priority: -20, // 优先级
+                    reuseExistingChunk: true, // 如果模块被打包过了，就忽略
+                    filename: 'common.js'
+                },
+            },
+        }
+    },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, '../dist'),
     }
 }

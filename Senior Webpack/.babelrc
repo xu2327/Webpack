@@ -10,9 +10,12 @@
                     "safari": "11.1"
                 },
                 "useBuiltIns": "usage",
-                "corejs": "3"
+                "corejs": 2
             }
         ],
         "@babel/preset-react"
+    ],
+    "plugins": [
+        "@babel/plugin-syntax-dynamic-import"
     ]
 }
