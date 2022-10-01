@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -12,7 +13,11 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
+                use: [
+                    {
+                        loader: 'babel-loader',
+                    }
+                ],
             },
             {
                 test: /\.(jpg|png|gif)$/,
@@ -37,7 +42,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'src/index.html',
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            _: 'lodash'
+        })
     ],
     optimization: {
         usedExports: true,

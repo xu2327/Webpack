@@ -192,3 +192,30 @@ body {
 `performance: false` 不让他提示我们一些性能上的问题
 
 为了防止用户刷新后，请求的文件还是和源文件一样，不会因为你修改了代码看到最新的内容，所以会用到 hash，这样可以去解决文件名一样的问题，就保证，我在项目里更改代码，不会影响到线上的问题，因为每次你的文件发生了改变，hash 也会变得不一样
+
+# Shimming
+
+```js
+new webpack.ProvidePlugin({
+  $: 'jquery',
+});
+```
+
+当你使用 $ 得时候，他得底层会自动帮你做这样一步操作
+`import $ from 'jquery'`
+
+如果我们想用 lodash 里得 \_ 那我们也去配置一个
+
+```js
+new webpack.ProvidePlugin({
+  $: 'jquery',
+  _: 'lodash',
+});
+```
+
+就可以用了
+
+如果你想你得每一个模块得 this 都指向 window 那就
+`npm i imports-loader --save-dev`
+
+webpack5 不支持这个配置了
