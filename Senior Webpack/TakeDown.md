@@ -95,4 +95,25 @@ window._ = _;
     },
 ```
 
+这些都是默认项，不写就是默认
+
 # Lazy Loading 懒加载, Chunk
+
+懒加载
+
+```js
+async function getComponent() {
+  const { default: _ } = await import(/*webpackChunkName:"lodash"*/ 'lodash');
+  const element = document.createElement('div');
+  element.innerHTML = _.join(['xuwei', 'www'], '-');
+  return element;
+}
+
+document.addEventListener('click', () => {
+  getComponent().then((element) => {
+    document.body.appendChild(element);
+  });
+});
+```
+
+chunk 是你页面引入一个包，那就算一个 chunk

@@ -5,7 +5,7 @@ const commonConfig = require('./webpack.common.js')
 
 const devConfig = {
   mode: 'development',
-  devtool: 'cheap-source-map',
+  devtool: 'eval-cheap-module-source-map',
   devServer: {
     // 指定端口
     port: 8000,

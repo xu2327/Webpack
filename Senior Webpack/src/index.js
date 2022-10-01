@@ -45,11 +45,38 @@ add(1, 1)
 //     document.body.appendChild(element);
 // });
 
-import _ from 'lodash'
+// import _ from 'lodash'
 
-const element = document.createElement('div');
-element.innerHTML = _.join(['xuwei', 'www'], '-');
-document.body.appendChild(element);
+// const element = document.createElement('div');
+// element.innerHTML = _.join(['xuwei', 'www'], '-');
+// document.body.appendChild(element);
 
 // import { add } from './math.js'
 // add(1, 2)
+
+
+/**
+ * todo Lazy Loading 懒加载, Chunk
+ */
+
+// function getComponent() {
+//     return import(/*webpackChunkName:"lodash"*/'lodash').then(({ default: _ }) => {
+//         const element = document.createElement('div');
+//         element.innerHTML = _.join(['xuwei', 'www'], '-');
+//         return element;
+//     })
+// }
+
+async function getComponent() {
+    const { default: _ } = await import(/*webpackChunkName:"lodash"*/'lodash')
+    const element = document.createElement('div');
+    element.innerHTML = _.join(['xuwei', 'www'], '-');
+    return element;
+}
+
+
+document.addEventListener('click', () => {
+    getComponent().then((element) => {
+        document.body.appendChild(element);
+    });
+})
