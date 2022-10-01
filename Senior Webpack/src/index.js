@@ -13,6 +13,7 @@ add(1, 1)
 
 /* import _ from 'lodash' */
 
+
 // 第一种方式
 // 首次访问页面时，加载 main.js (2mb)
 // 打包文件会很大，加载时间会长
@@ -85,10 +86,17 @@ add(1, 1)
  * todo Preloading Prefetching
  */
 
+// document.addEventListener('click', () => {
+//     import(/* webpackPrefetch: true */'./click.js').then(({ default: func }) => {
+//         func();
+//     })
+// })
 
 
-document.addEventListener('click', () => {
-    import(/* webpackPrefetch: true */'./click.js').then(({ default: func }) => {
-        func();
-    })
-})
+/**
+ * todo CSS 文件分割
+ */
+
+import './style.css'
+import './style1.css'
+console.log(123)

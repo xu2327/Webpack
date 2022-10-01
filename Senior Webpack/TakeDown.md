@@ -127,3 +127,62 @@ chunk 是你页面引入一个包，那就算一个 chunk
 webpackPreloading: true 是跟你的主模块一块加载
 
 webpackPrefetch: true 就是等你游览器有空余的时间的时候，就会偷偷的去帮你加载一下，就不用等到你去点击的时候再加载了，当你再点击的时候，就是直接拿缓存了
+
+# CSS 文件的代码分割
+
+`npm i --save-dev mini-css-extract-plugin ` 适合在线上环境上使用
+
+要先引入`const MiniCssExtractPlugin = require('mini-css-extract-plugin')`
+
+```js
+    module: {
+        rules: [
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2
+                        }
+                    },
+                    'sass-loader',
+                    'postcss-loader'
+                ],
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader'
+                ],
+            },
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin({})
+    ]
+```
+
+`npm i optimize-css-assets-webpack-plugin -D` webpack5 不支持
+
+使用 ` npm install css-minimizer-webpack-plugin --save-dev`
+
+```js
+    optimization: {
+        minimizer: [
+            new CssMinimizerPlugin(),
+        ]
+    },
+```
+
+然后代码就会被压缩合并
+
+```css
+body {
+  background-color: #afeeee;
+  font-size: 100px;
+}
+```
